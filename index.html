@@ -6,12 +6,18 @@
   <title>GGN Check-in/Check-out</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-  <!-- Google Font: Kanit -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <style>
+    /* โหลดฟอนต์ TH Sarabun New */
+    @font-face {
+      font-family: 'THSarabunNew';
+      src: url('https://cdn.jsdelivr.net/gh/superchooko/thsarabunnew/THSarabunNew.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     body {
-      font-family: 'Kanit', sans-serif;
+      font-family: 'THSarabunNew', sans-serif;
+      font-size: 20px;
       max-width: 500px;
       margin: auto;
       padding: 20px;
@@ -23,9 +29,8 @@
       text-align: center;
       color: #800000;
       margin-bottom: 15px;
-      font-size: 26px;
-      font-weight: 700;
-      text-shadow: 1px 1px 1px #ffcccc;
+      font-size: 28px;
+      font-weight: bold;
     }
 
     .logo {
@@ -38,22 +43,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: bold;
-      font-size: 14px;
-      color: #555;
       overflow: hidden;
     }
 
     label {
       margin-right: 15px;
-      font-weight: 600;
-      font-size: 16px;
+      font-weight: bold;
+      font-size: 20px;
       cursor: pointer;
     }
 
     input[type="radio"] {
       margin-right: 5px;
-      transform: scale(1.1);
+      transform: scale(1.2);
       cursor: pointer;
     }
 
@@ -62,21 +64,20 @@
     input[type="text"],
     button {
       width: 100%;
-      font-size: 16px;
+      font-size: 20px;
       padding: 10px;
       margin-top: 10px;
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      font-family: 'Kanit', sans-serif;
+      font-family: 'THSarabunNew', sans-serif;
     }
 
     button {
       background-color: #800000;
       color: white;
       border: none;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -90,9 +91,7 @@
       border: 1px solid #d9b3b3;
       padding: 10px;
       white-space: pre-wrap;
-      font-size: 16px;
-      font-weight: 500;
-      color: #5a0000;
+      font-size: 20px;
       margin-top: 10px;
       min-height: 70px;
     }
@@ -141,14 +140,7 @@
   <input type="text" id="fullname" placeholder="ชื่อ-นามสกุล (บังคับกรอก)" required />
   <textarea id="text" rows="2" placeholder="ข้อความเพิ่มเติม (ถ้ามี)"></textarea>
   <div id="previewText"></div>
-
-  <input
-    type="file"
-    id="imageInput"
-    accept="image/jpeg,image/png"
-    multiple
-  />
-
+  <input type="file" id="imageInput" accept="image/jpeg,image/png" multiple />
   <button id="sendBtn">ส่งภาพและ Log เข้า Telegram</button>
 
   <div id="previewContainer"></div>
@@ -256,7 +248,6 @@
           const form = new FormData();
           form.append("chat_id", chatId);
           form.append("photo", blob, `photo${i + 1}.jpg`);
-          // เพิ่ม caption แค่ภาพแรก (Telegram จะโชว์เฉพาะภาพแรกใน media group ถ้าใช้ sendPhoto แยก)
           if (i === 0) form.append("caption", caption);
 
           await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
@@ -267,7 +258,6 @@
           processedPhotos.push({ i: i + 1, nowStr, name, job, extraMsg });
         }
 
-        // สร้าง Excel Log
         const wb = XLSX.utils.book_new();
         const data = [["ลำดับ", "วันเวลา", "ชื่อ", "ประเภทงาน", "ข้อความ"]];
         processedPhotos.forEach(p =>
@@ -306,7 +296,6 @@
 
     document.getElementById("sendBtn").addEventListener("click", sendToTelegram);
 
-    // initial preview state
     updatePreviewText();
   </script>
 </body>
