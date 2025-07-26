@@ -58,6 +58,7 @@
     input[type="file"],
     textarea,
     input[type="text"],
+    select,
     button {
       width: 100%;
       font-size: 16px;
@@ -132,6 +133,16 @@
     <label><input type="radio" name="jobType" value="Check out (ออกงาน)"> Check out (ออกงาน)</label>
   </div>
 
+  <select id="locationSelect">
+    <option value="">เลือกจุดตรวจ (บังคับเลือก)</option>
+    <option value="นครปฐม">1. นครปฐม</option>
+    <option value="สมุทรสาคร">2. สมุทรสาคร</option>
+    <option value="หนองแค">3. หนองแค</option>
+    <option value="ลาดกระบัง">4. ลาดกระบัง</option>
+    <option value="สุราพิเศษทิพราช">5. สุราพิเศษทิพราช</option>
+    <option value="ไทยคอนเทรนเนอร์">6. ไทยคอนเทรนเนอร์</option>
+  </select>
+
   <input type="text" id="fullname" placeholder="ชื่อ-นามสกุล (บังคับกรอก)" />
   <textarea id="text" rows="2" placeholder="ข้อความเพิ่มเติม (ถ้ามี)"></textarea>
   <div id="previewText"></div>
@@ -151,6 +162,7 @@
     const previewText = document.getElementById("previewText");
     const extraText = document.getElementById("text");
     const fullname = document.getElementById("fullname");
+    const locationSelect = document.getElementById("locationSelect");
     const status = document.getElementById("status");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
@@ -187,13 +199,15 @@
       const job = getSelectedJob() || "-";
       const extra = extraText.value.trim();
       const name = fullname.value.trim() || "-";
+      const location = locationSelect.value || "-";
       const nowStr = new Date().toLocaleString("th-TH");
       previewText.textContent =
-        `📅 ${nowStr}\n👤 ชื่อ: ${name}\n📌 งาน: ${job}${extra ? `\n📝 ${extra}` : ""}`;
+        `📅 ${nowStr}\n👤 ชื่อ: ${name}\n📍 จุดตรวจ: ${location}\n📌 งาน: ${job}${extra ? `\n📝 ${extra}` : ""}`;
     }
 
     extraText.addEventListener("input", updatePreviewText);
     fullname.addEventListener("input", updatePreviewText);
+    locationSelect.addEventListener("change", updatePreviewText);
     document.querySelectorAll('input[name="jobType"]').forEach(el => {
       el.addEventListener("change", updatePreviewText);
     });
@@ -216,6 +230,7 @@
       const name = fullname.value.trim();
       const job = getSelectedJob();
       const extraMsg = extraText.value.trim();
+      const location = locationSelect.value;
 
       if (!name) {
         alert("กรุณากรอกชื่อ-นามสกุล");
@@ -226,6 +241,12 @@
       if (/\d/.test(name)) {
         alert("ห้ามกรอกตัวเลขในชื่อ-นามสกุล");
         fullname.focus();
+        return;
+      }
+
+      if (!location) {
+        alert("กรุณาเลือกจุดตรวจ");
+        locationSelect.focus();
         return;
       }
 
@@ -256,13 +277,13 @@
           body: form
         });
 
-        processedPhotos.push({ i: i + 1, nowStr, name, job, extraMsg });
+        processedPhotos.push({ i: i + 1, nowStr, name, job, extraMsg, location });
       }
 
       const wb = XLSX.utils.book_new();
-      const data = [["ลำดับ", "วันเวลา", "ชื่อ", "ประเภทงาน", "ข้อความ"]];
+      const data = [["ลำดับ", "วันเวลา", "ชื่อ", "จุดตรวจ", "ประเภทงาน", "ข้อความ"]];
       processedPhotos.forEach(p =>
-        data.push([p.i, p.nowStr, p.name, p.job, p.extraMsg])
+        data.push([p.i, p.nowStr, p.name, p.location, p.job, p.extraMsg])
       );
       const ws = XLSX.utils.aoa_to_sheet(data);
       XLSX.utils.book_append_sheet(wb, ws, "Log");
@@ -284,6 +305,7 @@
       previewText.textContent = "";
       extraText.value = "";
       fullname.value = "";
+      locationSelect.value = "";
       document.querySelectorAll('input[name="jobType"]').forEach(el => el.checked = false);
     }
 
