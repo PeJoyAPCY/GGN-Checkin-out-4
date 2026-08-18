@@ -355,7 +355,7 @@
   <div class="logo">
 
     <img
-      src="./logo%20ggn%202016.png"
+      src="https://img2.pic.in.th/pic/logo-ggn.png"
       alt="โลโก้"
     />
 
@@ -368,7 +368,7 @@
 
   <h2 class="zone-title">
 
-    เขต ภาคตะวันตก
+    เขต ตะวันตก
 
   </h2>
 
@@ -425,55 +425,81 @@
   <select id="locationSelect">
 
     <option value="">
+
       เลือกจุดตรวจ (บังคับเลือก)
+
     </option>
 
     <option value="สำนักงานใหญ่">
+
       1. สำนักงานใหญ่
+
     </option>
 
     <option value="หนองแค">
+
       2. หนองแค
+
     </option>
 
     <option value="ลาดกระบัง">
+
       3. ลาดกระบัง
+
     </option>
 
     <option value="สุราพิเศษทิพราช">
+
       4. สุราพิเศษทิพราช
+
     </option>
 
     <option value="ไทยคอนเทนเนอร์">
+
       5. ไทยคอนเทนเนอร์
+
     </option>
 
     <option value="หมู่บ้านตะวันฉาย">
+
       6. หมู่บ้านตะวันฉาย
+
     </option>
 
     <option value="ลานเหล็กลำเลียง">
+
       7. ลานเหล็กลำเลียง
+
     </option>
 
     <option value="เอ็น.พี สลิตติ้ง">
+
       8. เอ็น.พี สลิตติ้ง
+
     </option>
 
     <option value="ณโรโน่ โลจิสติกส์">
+
       9. ณโรโน่ โลจิสติกส์
+
     </option>
 
     <option value="สยามฟอเรสทรี พนมทวน">
+
       10. สยามฟอเรสทรี พนมทวน
+
     </option>
 
     <option value="ศรีฟ้า โฟรเซนฟู้ด">
+
       11. ศรีฟ้า โฟรเซนฟู้ด
+
     </option>
 
     <option value="บริษัท SC&A จำกัด">
+
       12. บริษัท SC&A จำกัด
+
     </option>
 
   </select>
@@ -684,7 +710,7 @@
               ) {
 
                 status.textContent =
-                  "❌ ส่งไม่สำเร็จ: ไม่รองรับไฟล์ .heic กรุณาใช้ .jpg หรือ .png";
+                  "❌ ไม่รองรับไฟล์ .heic กรุณาใช้ .jpg หรือ .png";
 
                 return false;
 
@@ -777,15 +803,17 @@
 
       previewText.textContent =
 
-        `📅 ${nowStr}\n` +
+        `📷 GGN CHECK-IN\n\n` +
 
-        `📍 เขต: ${ZONE}\n` +
+        `📅 เวลา: ${nowStr}\n` +
 
         `👤 ชื่อ: ${name}\n` +
 
-        `📍 จุดตรวจ: ${location}\n` +
+        `📌 งาน: ${job}\n` +
 
-        `📌 งาน: ${job}` +
+        `📍 เขต: ${ZONE}\n` +
+
+        `🏢 จุดตรวจ: ${location}` +
 
         (
           extra
@@ -1173,7 +1201,7 @@
               imageBase64,
 
             imageName:
-              `checkin-west-${Date.now()}-${i + 1}.jpg`
+              `checkin-${Date.now()}-${i + 1}.jpg`
 
           };
 
