@@ -1,296 +1,1269 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
   <title>GGN Check-in/Check-out</title>
+
+
   <style>
+
     body {
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      max-width: 500px;
-      margin: auto;
-      padding: 20px;
-      background-color: #fdf5f7;
-      color: #400000;
+
+      font-family:
+        "Segoe UI",
+        Tahoma,
+        sans-serif;
+
+      max-width:
+        500px;
+
+      margin:
+        auto;
+
+      padding:
+        20px;
+
+      background-color:
+        #fdf5f7;
+
+      color:
+        #400000;
+
     }
+
+
+    /* =========================================
+       LOGO
+       ========================================= */
 
     .logo {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 10px;
-      background-color: #ddd;
-      border-radius: 50%;
-      overflow: hidden;
+
+      width:
+        100px;
+
+      height:
+        100px;
+
+      margin:
+        0 auto 10px;
+
+      overflow:
+        hidden;
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      align-items:
+        center;
+
     }
+
 
     .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        contain;
+
     }
+
+
+    /* =========================================
+       TITLE
+       ========================================= */
 
     .zone-title {
-      margin: 0;
-      font-size: 22px;
-      color: #800000;
-      margin-bottom: 5px;
-      text-align: center;
+
+      margin:
+        0;
+
+      font-size:
+        22px;
+
+      color:
+        #800000;
+
+      margin-bottom:
+        5px;
+
+      text-align:
+        center;
+
     }
+
 
     .system-title {
-      margin: 0;
-      font-size: 18px;
-      color: #800000;
-      margin-bottom: 15px;
-      text-align: center;
+
+      margin:
+        0;
+
+      font-size:
+        18px;
+
+      color:
+        #800000;
+
+      margin-bottom:
+        15px;
+
+      text-align:
+        center;
+
     }
+
+
+    /* =========================================
+       JOB TYPE
+       ========================================= */
 
     label {
-      margin-right: 15px;
-      font-weight: bold;
+
+      margin-right:
+        15px;
+
+      font-weight:
+        bold;
+
     }
 
+
     input[type="radio"] {
-      margin-right: 5px;
+
+      margin-right:
+        5px;
+
     }
+
+
+    /* =========================================
+       FORM
+       ========================================= */
 
     input[type="file"],
     textarea,
     input[type="text"],
     select,
     button {
-      width: 100%;
-      font-size: 16px;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
+
+      width:
+        100%;
+
+      font-size:
+        16px;
+
+      padding:
+        10px;
+
+      margin-top:
+        10px;
+
+      border-radius:
+        6px;
+
+      border:
+        1px solid #ccc;
+
+      box-sizing:
+        border-box;
+
     }
+
+
+    /* =========================================
+       BUTTON
+       ========================================= */
 
     button {
-      background-color: #800000;
-      color: white;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
+
+      background-color:
+        #800000;
+
+      color:
+        white;
+
+      border:
+        none;
+
+      font-weight:
+        bold;
+
+      cursor:
+        pointer;
+
+      transition:
+        background-color 0.3s;
+
     }
+
 
     button:hover {
-      background-color: #a00000;
+
+      background-color:
+        #a00000;
+
     }
+
+
+    button:disabled {
+
+      background-color:
+        #aaa;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    /* =========================================
+       TEXT PREVIEW
+       ========================================= */
 
     #previewText {
-      background: #fff5f5;
-      border: 1px solid #d9b3b3;
-      padding: 10px;
-      white-space: pre-wrap;
-      font-size: 15px;
-      margin-top: 10px;
+
+      background:
+        #fff5f5;
+
+      border:
+        1px solid #d9b3b3;
+
+      padding:
+        10px;
+
+      white-space:
+        pre-wrap;
+
+      font-size:
+        15px;
+
+      margin-top:
+        10px;
+
     }
+
+
+    /* =========================================
+       IMAGE PREVIEW
+       ========================================= */
 
     #previewContainer {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      margin-top: 10px;
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        8px;
+
+      justify-content:
+        center;
+
+      margin-top:
+        10px;
+
     }
+
 
     #previewContainer img {
-      width: 120px;
-      height: 160px;
-      object-fit: cover;
-      border: 2px solid #800000;
-      border-radius: 6px;
+
+      width:
+        120px;
+
+      height:
+        160px;
+
+      object-fit:
+        cover;
+
+      border:
+        2px solid #800000;
+
+      border-radius:
+        6px;
+
     }
+
+
+    /* =========================================
+       STATUS
+       ========================================= */
 
     #status {
-      margin-top: 10px;
-      font-weight: bold;
-      text-align: center;
-      color: #800000;
+
+      margin-top:
+        10px;
+
+      font-weight:
+        bold;
+
+      text-align:
+        center;
+
+      color:
+        #800000;
+
+      white-space:
+        pre-wrap;
+
+      min-height:
+        24px;
+
     }
+
+
+    /* =========================================
+       CANVAS
+       ========================================= */
 
     canvas {
-      display: none;
+
+      display:
+        none;
+
     }
+
   </style>
+
 </head>
+
+
 <body>
 
+
+  <!-- ========================================
+       LOGO
+       ======================================== -->
+
   <div class="logo">
-    <img src="https://img2.pic.in.th/pic/logo-ggn.png" alt="โลโก้" />
+
+    <img
+      src="./logo%20ggn%202016.png"
+      alt="โลโก้"
+    />
+
   </div>
 
-  <h2 class="zone-title">เขต ภาคตะวันตก</h2>
-  <h2 class="system-title">📷 ระบบ Check in / Check out</h2>
+
+  <!-- ========================================
+       ZONE
+       ======================================== -->
+
+  <h2 class="zone-title">
+
+    เขต ภาคตะวันตก
+
+  </h2>
+
+
+  <!-- ========================================
+       SYSTEM TITLE
+       ======================================== -->
+
+  <h2 class="system-title">
+
+    📷 ระบบ Check in / Check out
+
+  </h2>
+
+
+  <!-- ========================================
+       JOB TYPE
+       ======================================== -->
 
   <div>
-    <label><input type="radio" name="jobType" value="Check in (เข้างาน)"> Check in (เข้างาน)</label>
-    <label><input type="radio" name="jobType" value="Check out (ออกงาน)"> Check out (ออกงาน)</label>
+
+    <label>
+
+      <input
+        type="radio"
+        name="jobType"
+        value="Check in (เข้างาน)"
+      />
+
+      Check in (เข้างาน)
+
+    </label>
+
+
+    <label>
+
+      <input
+        type="radio"
+        name="jobType"
+        value="Check out (ออกงาน)"
+      />
+
+      Check out (ออกงาน)
+
+    </label>
+
   </div>
 
+
+  <!-- ========================================
+       LOCATION
+       ======================================== -->
+
   <select id="locationSelect">
-    <option value="">เลือกจุดตรวจ (บังคับเลือก)</option>
-    <option value="สำนักงานใหญ่">1. สำนักงานใหญ่</option>
-    <option value="หนองแค">2. หนองแค</option>
-    <option value="ลาดกระบัง">3. ลาดกระบัง</option>
-    <option value="สุราพิเศษทิพราช">4. สุราพิเศษทิพราช</option>
-    <option value="ไทยคอนเทรนเนอร์">5. ไทยคอนเทนเนอร์</option>
-    <option value="หมู่บ้านตะวันฉาย">6. หมู่บ้านตะวันฉาย</option>
-    <option value="ลานเหล็กลำเลียง">7. ลานเหล็กลำเลียง</option>
-    <option value="เอ็น.พี สลิตติ้ง">8. เอ็น.พี สลิตติ้ง</option>
-    <option value="ณโรโน่ โลจิสติกส์">9. ณโรโน่ โลจิสติกส์</option>
-    <option value="สยามฟอเรสทรี พนมทวน">10. สยามฟอเรสทรี พนมทวน</option>
-    <option value="ศรีฟ้า โฟรเซนฟู้ด">11. ศรีฟ้า โฟรเซนฟู้ด</option>
-    <option value="บริษัท SC&A จำกัด">12. บริษัท SC&A จำกัด</option>
+
+    <option value="">
+      เลือกจุดตรวจ (บังคับเลือก)
+    </option>
+
+    <option value="สำนักงานใหญ่">
+      1. สำนักงานใหญ่
+    </option>
+
+    <option value="หนองแค">
+      2. หนองแค
+    </option>
+
+    <option value="ลาดกระบัง">
+      3. ลาดกระบัง
+    </option>
+
+    <option value="สุราพิเศษทิพราช">
+      4. สุราพิเศษทิพราช
+    </option>
+
+    <option value="ไทยคอนเทรนเนอร์">
+      5. ไทยคอนเทนเนอร์
+    </option>
+
+    <option value="หมู่บ้านตะวันฉาย">
+      6. หมู่บ้านตะวันฉาย
+    </option>
+
+    <option value="ลานเหล็กลำเลียง">
+      7. ลานเหล็กลำเลียง
+    </option>
+
+    <option value="เอ็น.พี สลิตติ้ง">
+      8. เอ็น.พี สลิตติ้ง
+    </option>
+
+    <option value="ณโรโน่ โลจิสติกส์">
+      9. ณโรโน่ โลจิสติกส์
+    </option>
+
+    <option value="สยามฟอเรสทรี พนมทวน">
+      10. สยามฟอเรสทรี พนมทวน
+    </option>
+
+    <option value="ศรีฟ้า โฟรเซนฟู้ด">
+      11. ศรีฟ้า โฟรเซนฟู้ด
+    </option>
+
+    <option value="บริษัท SC&A จำกัด">
+      12. บริษัท SC&A จำกัด
+    </option>
+
   </select>
 
-  <input type="text" id="fullname" placeholder="ชื่อ-นามสกุล (บังคับกรอก)" />
-  <textarea id="text" rows="2" placeholder="ข้อความเพิ่มเติม (ถ้ามี)"></textarea>
-  <div id="previewText"></div>
-  <input type="file" id="imageInput" accept="image/jpeg,image/png" multiple />
-  <button id="sendBtn">ส่งภาพเข้า Telegram</button>
 
-  <div id="previewContainer"></div>
-  <div id="status"></div>
-  <canvas id="canvas"></canvas>
+  <!-- ========================================
+       NAME
+       ======================================== -->
+
+  <input
+    type="text"
+    id="fullname"
+    placeholder="ชื่อ-นามสกุล (บังคับกรอก)"
+  />
+
+
+  <!-- ========================================
+       EXTRA TEXT
+       ======================================== -->
+
+  <textarea
+    id="text"
+    rows="2"
+    placeholder="ข้อความเพิ่มเติม (ถ้ามี)"
+  ></textarea>
+
+
+  <!-- ========================================
+       PREVIEW TEXT
+       ======================================== -->
+
+  <div id="previewText"></div>
+
+
+  <!-- ========================================
+       IMAGE
+       ======================================== -->
+
+  <input
+    type="file"
+    id="imageInput"
+    accept="image/jpeg,image/png"
+    multiple
+  />
+
+
+  <!-- ========================================
+       SEND BUTTON
+       ======================================== -->
+
+  <button
+    id="sendBtn"
+  >
+
+    ส่งภาพเข้า Telegram
+
+  </button>
+
+
+  <!-- ========================================
+       IMAGE PREVIEW
+       ======================================== -->
+
+  <div
+    id="previewContainer"
+  ></div>
+
+
+  <!-- ========================================
+       STATUS
+       ======================================== -->
+
+  <div
+    id="status"
+  ></div>
+
+
+  <!-- ========================================
+       CANVAS
+       ======================================== -->
+
+  <canvas
+    id="canvas"
+  ></canvas>
+
+
 
   <script>
-    const botToken = "8185310207:AAEzMHjIRdCftCfmk8shWSoe2v1a-aiRmyw";
-    const chatId = "-1002899996356";
 
-    const imageInput = document.getElementById("imageInput");
-    const previewContainer = document.getElementById("previewContainer");
-    const previewText = document.getElementById("previewText");
-    const extraText = document.getElementById("text");
-    const fullname = document.getElementById("fullname");
-    const locationSelect = document.getElementById("locationSelect");
-    const status = document.getElementById("status");
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+
+    // ==================================================
+    // TELEGRAM
+    // ==================================================
+
+    const botToken =
+      "8185310207:AAEzMHjIRdCftCfmk8shWSoe2v1a-aiRmyw";
+
+
+    const chatId =
+      "-1002899996356";
+
+
+    // ==================================================
+    // ELEMENTS
+    // ==================================================
+
+    const imageInput =
+      document.getElementById(
+        "imageInput"
+      );
+
+
+    const previewContainer =
+      document.getElementById(
+        "previewContainer"
+      );
+
+
+    const previewText =
+      document.getElementById(
+        "previewText"
+      );
+
+
+    const extraText =
+      document.getElementById(
+        "text"
+      );
+
+
+    const fullname =
+      document.getElementById(
+        "fullname"
+      );
+
+
+    const locationSelect =
+      document.getElementById(
+        "locationSelect"
+      );
+
+
+    const status =
+      document.getElementById(
+        "status"
+      );
+
+
+    const sendBtn =
+      document.getElementById(
+        "sendBtn"
+      );
+
+
+    const canvas =
+      document.getElementById(
+        "canvas"
+      );
+
+
+    const ctx =
+      canvas.getContext(
+        "2d"
+      );
+
+
+    // ==================================================
+    // PHOTOS
+    // ==================================================
 
     let photos = [];
 
+
+
+    // ==================================================
+    // GET JOB TYPE
+    // ==================================================
+
     function getSelectedJob() {
-      const selected = document.querySelector('input[name="jobType"]:checked');
-      return selected ? selected.value : "";
+
+      const selected =
+        document.querySelector(
+          'input[name="jobType"]:checked'
+        );
+
+
+      return selected
+        ? selected.value
+        : "";
+
     }
 
-    imageInput.addEventListener("change", (e) => {
-      photos = Array.from(e.target.files).filter(file => {
-        if (file.type === "image/heic" || file.name.endsWith(".heic")) {
-          alert("ไม่รองรับไฟล์ .heic กรุณาใช้ .jpg หรือ .png");
-          return false;
-        }
-        return true;
-      });
-      updatePreview();
-    });
+
+
+    // ==================================================
+    // IMAGE SELECT
+    // ==================================================
+
+    imageInput.addEventListener(
+      "change",
+      (e) => {
+
+        photos =
+          Array.from(
+            e.target.files
+          ).filter(
+            file => {
+
+              if (
+                file.type === "image/heic" ||
+                file.name
+                  .toLowerCase()
+                  .endsWith(".heic")
+              ) {
+
+                status.textContent =
+                  "❌ ส่งไม่สำเร็จ: ไม่รองรับไฟล์ .heic กรุณาใช้ .jpg หรือ .png";
+
+                return false;
+
+              }
+
+
+              return true;
+
+            }
+          );
+
+
+        updatePreview();
+
+        updatePreviewText();
+
+      }
+    );
+
+
+
+    // ==================================================
+    // IMAGE PREVIEW
+    // ==================================================
 
     function updatePreview() {
-      previewContainer.innerHTML = "";
-      photos.forEach(file => {
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(file);
-        previewContainer.appendChild(img);
-      });
+
+      previewContainer.innerHTML =
+        "";
+
+
+      photos.forEach(
+        file => {
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+
+          img.src =
+            URL.createObjectURL(
+              file
+            );
+
+
+          previewContainer.appendChild(
+            img
+          );
+
+        }
+      );
+
     }
+
+
+
+    // ==================================================
+    // TEXT PREVIEW
+    // ==================================================
 
     function updatePreviewText() {
-      const job = getSelectedJob() || "-";
-      const extra = extraText.value.trim();
-      const name = fullname.value.trim() || "-";
-      const location = locationSelect.value || "-";
-      const nowStr = new Date().toLocaleString("th-TH");
+
+      const job =
+        getSelectedJob() ||
+        "-";
+
+
+      const extra =
+        extraText.value.trim();
+
+
+      const name =
+        fullname.value.trim() ||
+        "-";
+
+
+      const location =
+        locationSelect.value ||
+        "-";
+
+
+      const nowStr =
+        new Date().toLocaleString(
+          "th-TH"
+        );
+
+
       previewText.textContent =
-        `📅 ${nowStr}\n👤 ชื่อ: ${name}\n📍 จุดตรวจ: ${location}\n📌 งาน: ${job}${extra ? `\n📝 ${extra}` : ""}`;
+
+        `📅 ${nowStr}\n` +
+
+        `👤 ชื่อ: ${name}\n` +
+
+        `📍 จุดตรวจ: ${location}\n` +
+
+        `📌 งาน: ${job}` +
+
+        (
+          extra
+            ? `\n📝 ${extra}`
+            : ""
+        );
+
     }
 
-    extraText.addEventListener("input", updatePreviewText);
-    fullname.addEventListener("input", updatePreviewText);
-    locationSelect.addEventListener("change", updatePreviewText);
-    document.querySelectorAll('input[name="jobType"]').forEach(el => {
-      el.addEventListener("change", updatePreviewText);
-    });
+
+
+    // ==================================================
+    // EVENTS
+    // ==================================================
+
+    extraText.addEventListener(
+      "input",
+      updatePreviewText
+    );
+
+
+    fullname.addEventListener(
+      "input",
+      updatePreviewText
+    );
+
+
+    locationSelect.addEventListener(
+      "change",
+      updatePreviewText
+    );
+
+
+    document
+      .querySelectorAll(
+        'input[name="jobType"]'
+      )
+      .forEach(
+        el => {
+
+          el.addEventListener(
+            "change",
+            updatePreviewText
+          );
+
+        }
+      );
+
+
+
+    // ==================================================
+    // PROCESS IMAGE
+    // ==================================================
 
     async function processImage(file) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => {
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0);
-          canvas.toBlob(blob => resolve(blob), "image/jpeg", 0.9);
-        };
-        img.src = URL.createObjectURL(file);
-      });
+
+      return new Promise(
+        (resolve, reject) => {
+
+          const img =
+            new Image();
+
+
+          img.onload =
+            () => {
+
+              try {
+
+                canvas.width =
+                  img.naturalWidth;
+
+                canvas.height =
+                  img.naturalHeight;
+
+
+                ctx.clearRect(
+                  0,
+                  0,
+                  canvas.width,
+                  canvas.height
+                );
+
+
+                ctx.drawImage(
+                  img,
+                  0,
+                  0
+                );
+
+
+                canvas.toBlob(
+                  blob => {
+
+                    if (!blob) {
+
+                      reject(
+                        new Error(
+                          "ไม่สามารถประมวลผลรูปภาพได้"
+                        )
+                      );
+
+                      return;
+
+                    }
+
+
+                    resolve(
+                      blob
+                    );
+
+                  },
+                  "image/jpeg",
+                  0.9
+                );
+
+
+              } catch (error) {
+
+                reject(
+                  error
+                );
+
+              }
+
+            };
+
+
+          img.onerror =
+            () => {
+
+              reject(
+                new Error(
+                  "ไม่สามารถเปิดรูปภาพได้"
+                )
+              );
+
+            };
+
+
+          img.src =
+            URL.createObjectURL(
+              file
+            );
+
+        }
+      );
+
     }
+
+
+
+    // ==================================================
+    // SEND TO TELEGRAM
+    // ==================================================
 
     async function sendToTelegram() {
-      const name = fullname.value.trim();
-      const job = getSelectedJob();
-      const extraMsg = extraText.value.trim();
-      const location = locationSelect.value;
+
+
+      const name =
+        fullname.value.trim();
+
+
+      const job =
+        getSelectedJob();
+
+
+      const extraMsg =
+        extraText.value.trim();
+
+
+      const location =
+        locationSelect.value;
+
+
+      // -----------------------------------------------
+      // VALIDATE NAME
+      // -----------------------------------------------
 
       if (!name) {
-        alert("กรุณากรอกชื่อ-นามสกุล");
+
+        status.textContent =
+          "❌ ส่งไม่สำเร็จ: กรุณากรอกชื่อ-นามสกุล";
+
         fullname.focus();
+
         return;
+
       }
+
 
       if (/\d/.test(name)) {
-        alert("ห้ามกรอกตัวเลขในชื่อ-นามสกุล");
+
+        status.textContent =
+          "❌ ส่งไม่สำเร็จ: ห้ามกรอกตัวเลขในชื่อ-นามสกุล";
+
         fullname.focus();
+
         return;
+
       }
+
+
+      // -----------------------------------------------
+      // VALIDATE LOCATION
+      // -----------------------------------------------
 
       if (!location) {
-        alert("กรุณาเลือกจุดตรวจ");
+
+        status.textContent =
+          "❌ ส่งไม่สำเร็จ: กรุณาเลือกจุดตรวจ";
+
         locationSelect.focus();
+
         return;
+
       }
+
+
+      // -----------------------------------------------
+      // VALIDATE JOB
+      // -----------------------------------------------
 
       if (!job) {
-        alert("กรุณาเลือกประเภทงาน");
+
+        status.textContent =
+          "❌ ส่งไม่สำเร็จ: กรุณาเลือกประเภทงาน";
+
         return;
+
       }
 
-      if (photos.length === 0) {
-        alert("กรุณาเลือกรูปภาพ");
+
+      // -----------------------------------------------
+      // VALIDATE IMAGE
+      // -----------------------------------------------
+
+      if (
+        photos.length === 0
+      ) {
+
+        status.textContent =
+          "❌ ส่งไม่สำเร็จ: กรุณาเลือกรูปภาพ";
+
         return;
+
       }
+
+
+      // -----------------------------------------------
+      // PREPARE
+      // -----------------------------------------------
 
       updatePreviewText();
-      const caption = previewText.textContent;
 
-      for (let i = 0; i < photos.length; i++) {
-        const blob = await processImage(photos[i]);
-        const form = new FormData();
-        form.append("chat_id", chatId);
-        form.append("photo", blob, `photo${i + 1}.jpg`);
-        form.append("caption", caption);
 
-        await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-          method: "POST",
-          body: form
-        });
+      const caption =
+        previewText.textContent;
+
+
+      // -----------------------------------------------
+      // DISABLE BUTTON
+      // -----------------------------------------------
+
+      sendBtn.disabled =
+        true;
+
+
+      try {
+
+
+        // -------------------------------------------
+        // SEND EACH PHOTO
+        // -------------------------------------------
+
+        for (
+          let i = 0;
+          i < photos.length;
+          i++
+        ) {
+
+
+          status.textContent =
+            `⏳ กำลังส่งรูป ${i + 1}/${photos.length}...`;
+
+
+          // -----------------------------------------
+          // PROCESS IMAGE
+          // -----------------------------------------
+
+          const blob =
+            await processImage(
+              photos[i]
+            );
+
+
+          // -----------------------------------------
+          // FORM DATA
+          // -----------------------------------------
+
+          const form =
+            new FormData();
+
+
+          form.append(
+            "chat_id",
+            chatId
+          );
+
+
+          form.append(
+            "photo",
+            blob,
+            `photo${i + 1}.jpg`
+          );
+
+
+          form.append(
+            "caption",
+            caption
+          );
+
+
+          // -----------------------------------------
+          // SEND TELEGRAM
+          // -----------------------------------------
+
+          const response =
+            await fetch(
+              `https://api.telegram.org/bot${botToken}/sendPhoto`,
+              {
+
+                method:
+                  "POST",
+
+                body:
+                  form
+
+              }
+            );
+
+
+          // -----------------------------------------
+          // CHECK RESPONSE
+          // -----------------------------------------
+
+          const result =
+            await response.json();
+
+
+          console.log(
+            "Telegram response:",
+            result
+          );
+
+
+          if (
+            !response.ok ||
+            !result.ok
+          ) {
+
+            throw new Error(
+              result.description ||
+              "Telegram ส่งข้อมูลไม่สำเร็จ"
+            );
+
+          }
+
+        }
+
+
+        // =========================================
+        // SUCCESS
+        // =========================================
+
+        status.textContent =
+          "✅ ส่งสำเร็จ";
+
+
+        // =========================================
+        // RESET FORM
+        // =========================================
+
+        photos = [];
+
+
+        updatePreview();
+
+
+        previewText.textContent =
+          "";
+
+
+        extraText.value =
+          "";
+
+
+        fullname.value =
+          "";
+
+
+        locationSelect.value =
+          "";
+
+
+        imageInput.value =
+          "";
+
+
+        document
+          .querySelectorAll(
+            'input[name="jobType"]'
+          )
+          .forEach(
+            el => {
+
+              el.checked =
+                false;
+
+            }
+          );
+
+
+      } catch (error) {
+
+
+        // =========================================
+        // ERROR
+        // =========================================
+
+        console.error(
+          "GGN Check-in Error:",
+          error
+        );
+
+
+        status.textContent =
+          "❌ ส่งไม่สำเร็จ" +
+          (
+            error.message
+              ? `: ${error.message}`
+              : ""
+          );
+
+
+      } finally {
+
+        sendBtn.disabled =
+          false;
+
       }
 
-      status.textContent = "✅ ส่งภาพสำเร็จแล้ว!";
-      photos = [];
-      updatePreview();
-      previewText.textContent = "";
-      extraText.value = "";
-      fullname.value = "";
-      locationSelect.value = "";
-      document.querySelectorAll('input[name="jobType"]').forEach(el => el.checked = false);
     }
 
-    document.getElementById("sendBtn").addEventListener("click", sendToTelegram);
+
+
+    // ==================================================
+    // BUTTON
+    // ==================================================
+
+    sendBtn.addEventListener(
+      "click",
+      sendToTelegram
+    );
+
+
+
+    // ==================================================
+    // INITIAL PREVIEW
+    // ==================================================
+
+    updatePreviewText();
+
+
   </script>
+
+
 </body>
+
 </html>
